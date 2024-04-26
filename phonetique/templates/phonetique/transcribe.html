@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcripteur Phonétique</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 h-screen flex flex-col items-center justify-center">
+    <div class="w-full max-w-md">
+        <h1 class="text-4xl font-bold mb-4 text-center">Transcrivez votre texte en phonétique</h1>
+        <form id="transcriptionForm" method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="texte" class="block text-gray-700 text-sm font-bold mb-2">Entrez votre texte ici :</label>
+                <textarea id="texte" name="text" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="button" id="startBtn" aria-label="Démarrer l'enregistrement" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Démarrer l'enregistrement
+                </button>
+                <button type="button" id="stopBtn" aria-label="Arrêter l'enregistrement" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" disabled>
+                    Arrêter l'enregistrement
+                </button>
+            </div>
+            <audio id="audioPlayback" controls class="mt-4 hidden"></audio>
+            <div class="flex items-center justify-center mt-4">
+                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">
+                    Transcrire
+                </button>
+            </div>
+        </form>
+        <div id="transcriptionResult" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 hidden">
+            <h2 class="text-xl font-bold mb-2">Transcription Phonétique</h2>
+            <p class="text-gray-700" id="transcriptionText"></p>
+        </div>
+        <div id="alertBox" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Erreur!</strong>
+            <span class="block sm:inline" id="alertText"></span>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Questions Phonétiques</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.x/dist/tailwind.min.css" rel="stylesheet">
+    {% load static %}
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+    <div class="container max-w-4xl mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center text-gray-700 mb-6">Jeu de Questions Phonétiques</h1>
+        <div id="game-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Les cartes de questions seront injectées ici -->
+        </div>
+        <div class="score text-xl font-semibold text-right mt-4">
+           <!--  Score: <span id="score">0</span>--> 
+        </div>
+    </div>
+
+    <script src="{% static 'js/game.js' %}"></script>
+    <script>
+        // Assurez-vous que cette partie est bien intégrée dans votre game.js si vous ne voulez pas ajouter de script directement ici
+        const updateScore = (newScore) => {
+            const scoreElement = document.getElementById('score');
+            scoreElement.textContent = newScore;
+        };
+    </script>
+</body>
+</html>
